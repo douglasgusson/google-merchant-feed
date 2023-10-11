@@ -1,0 +1,16 @@
+{
+  "name": "simple",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Douglas Gusson",
+  "license": "MIT",
+  "dependencies": {
+    "google-merchant-feed": "file:../../"
+  }
+}
