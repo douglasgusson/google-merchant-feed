@@ -4,7 +4,7 @@ export type Tax = {
   rate?: number;
   country?: string;
   postalCode?: string;
-  taxShip?: YesNo;
+  taxShip?: YesNo.Model | boolean;
   region?: string;
   locationId?: string;
 };

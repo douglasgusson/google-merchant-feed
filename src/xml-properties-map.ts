@@ -3,24 +3,37 @@ import {
   xmlDateFormatter,
   xmlFixedNumberFormatBuilder,
   xmlObjectFormatter,
-  xmlYesNoFormatter,
 } from "./formatters";
 import {
   AgeGroup,
   Availability,
   DateRange,
+  DimensionWithUnit,
   Price,
   ValueWithUnit,
+  WeightWithUnit,
+  YesNo,
 } from "./models";
+import { Pause } from "./models/pause";
+import { Product } from "./models/product";
 
-export const xmlPropertiesMap = {
+export type XmlPropertiesMapNode = {
+  xmlName?: string;
+  xmlFormatter?: (...value: any) => Record<string, string> | string | void;
+  allowRepeat?: boolean;
+  items?: Record<string, XmlPropertiesMapNode>;
+};
+
+export type XmlPropertiesMapNodeItems = XmlPropertiesMapNode["items"];
+
+export const xmlPropertiesMap: Record<keyof Product, XmlPropertiesMapNode> = {
   id: { xmlName: "g:id" },
   title: { xmlName: "title" },
   description: { xmlName: "g:description" },
   link: { xmlName: "link" },
   imageLink: { xmlName: "g:image_link" },
   mobileLink: { xmlName: "g:mobile_link" },
-  additionalImageLink: {
+  additionalImageLinks: {
     xmlName: "g:additional_image_link",
     allowRepeat: true,
   },
@@ -56,6 +69,22 @@ export const xmlPropertiesMap = {
   unitPricingBaseMeasure: {
     xmlName: "g:unit_pricing_base_measure",
     xmlFormatter: ValueWithUnit.formatterWithoutSpace,
+  },
+  productLength: {
+    xmlName: "g:product_length",
+    xmlFormatter: DimensionWithUnit.formatter,
+  },
+  productWidth: {
+    xmlName: "g:product_width",
+    xmlFormatter: DimensionWithUnit.formatter,
+  },
+  productHeight: {
+    xmlName: "g:product_height",
+    xmlFormatter: DimensionWithUnit.formatter,
+  },
+  productWeight: {
+    xmlName: "g:product_weight",
+    xmlFormatter: WeightWithUnit.formatter,
   },
   installment: {
     xmlName: "g:installment",
@@ -102,7 +131,7 @@ export const xmlPropertiesMap = {
   sizeType: { xmlName: "g:size_type" },
   sizeSystem: { xmlName: "g:size_system" },
   itemGroupId: { xmlName: "g:item_group_id" },
-  adwordsRedirect: { xmlName: "g:ads_redirect" },
+  adsRedirect: { xmlName: "g:ads_redirect" },
   customLabels: { xmlFormatter: xmlCustomLabelsFormatter },
   promotionId: { xmlName: "g:promotion_id", allowRepeat: true },
   includedDestination: { xmlName: "g:included_destination", allowRepeat: true },
@@ -119,6 +148,10 @@ export const xmlPropertiesMap = {
       locationGroupName: { xmlName: "g:location_group_name" },
       service: { xmlName: "g:service" },
       price: { xmlName: "g:price", xmlFormatter: Price.formatter },
+      minHandlingTime: { xmlName: "g:min_handling_time" },
+      maxHandlingTime: { xmlName: "g:max_handling_time" },
+      minTransitTime: { xmlName: "g:min_transit_time" },
+      maxTransitTime: { xmlName: "g:max_transit_time" },
     },
   },
   shippingLabel: { xmlName: "g:shipping_label" },
@@ -151,7 +184,7 @@ export const xmlPropertiesMap = {
       locationId: { xmlName: "g:location_id" },
       locationGroupName: { xmlName: "g:location_group_name" },
       rate: { xmlName: "g:rate", xmlFormatter: xmlFixedNumberFormatBuilder(2) },
-      taxShip: { xmlName: "g:tax_ship", xmlFormatter: xmlYesNoFormatter },
+      taxShip: { xmlName: "g:tax_ship", xmlFormatter: YesNo.formatter },
     },
   },
   taxCategory: { xmlName: "g:tax_category" },
@@ -173,6 +206,38 @@ export const xmlPropertiesMap = {
       code: { xmlName: "g:certification_code" },
     },
   },
+  shoppingAdsExcludedCountries: {
+    xmlName: "g:shopping_ads_excluded_country",
+    allowRepeat: true,
+  },
+  externalSellerId: {
+    xmlName: "g:external_seller_id",
+  },
+  lifestyleImageLink: {
+    xmlName: "g:lifestyle_image_link",
+  },
+  pause: {
+    xmlName: "g:pause",
+    xmlFormatter: Pause.formatter,
+  },
+  productDetail: {
+    xmlName: "g:product_detail",
+    allowRepeat: true,
+    xmlFormatter: xmlObjectFormatter,
+    items: {
+      sectionName: { xmlName: "g:section_name" },
+      attributeName: { xmlName: "g:attribute_name" },
+      attributeValue: { xmlName: "g:attribute_value" },
+    },
+  },
+  productHighlight: {
+    xmlName: "g:product_highlight",
+    allowRepeat: true,
+  },
+  shipsFromCountry: {
+    xmlName: "g:ships_from_country",
+  },
+  transitTimeLabel: {
+    xmlName: "g:transit_time_label",
+  },
 };
-
-export type XMLPropertiesMap = typeof xmlPropertiesMap;

@@ -1,9 +1,10 @@
+import {
+  XmlPropertiesMapNode,
+  XmlPropertiesMapNodeItems,
+} from "./xml-properties-map";
+
 export function xmlDateFormatter(date?: Date) {
   return date && date.toISOString();
-}
-
-export function xmlYesNoFormatter(val?: boolean) {
-  return val ? "yes" : "no";
 }
 
 export function xmlFixedNumberFormatBuilder(precision: number) {
@@ -11,21 +12,29 @@ export function xmlFixedNumberFormatBuilder(precision: number) {
 }
 
 export function xmlCustomLabelsFormatter(
-  item: any,
-  _map: any,
+  items: string[] = [],
+  _map: any = {},
   root: Record<string, string>,
 ) {
   for (let i = 0; i < 5; i += 1) {
-    if (item[i] !== undefined) {
-      // eslint-disable-next-line no-param-reassign
-      root[`g:custom_label_${i}`] = item[i];
+    if (items[i] !== undefined) {
+      root[`g:custom_label_${i}`] = items[i];
     }
   }
 }
 
-export function xmlSingleItemProcessor(
-  prop: string,
-  map: Record<string, any>,
+/**
+ * Processes a single XML item based on the provided properties map.
+ *
+ * @param prop - The property to process.
+ * @param map - The map of properties to use for processing.
+ * @param root - The root object to add the processed property to.
+ *
+ * @returns The processed property.
+ */
+export function xmlSingleItemProcessor<T = unknown>(
+  prop: T,
+  map: XmlPropertiesMapNode,
   root: Record<string, string>,
 ) {
   if (map.xmlFormatter) {
@@ -35,28 +44,33 @@ export function xmlSingleItemProcessor(
   return prop;
 }
 
-export function xmlObjectFormatter(
-  contents: Record<string, any>,
-  map: Record<string, any>,
-) {
-  const item = {} as Record<string, any>;
+/**
+ * Formats an object into an XML object based on a given map of properties.
+ *
+ * @param contents - The object to format.
+ * @param map - The map of properties to use for formatting.
+ *
+ * @returns The formatted XML object.
+ */
+export function xmlObjectFormatter<T extends Record<string, unknown>>(
+  contents: T,
+  map: XmlPropertiesMapNodeItems,
+): Record<string, any> {
+  const item: Record<string, any> = {};
 
-  Object.keys(map).forEach((p) => {
-    if (contents[p] !== undefined) {
-      let result;
-      if (Array.isArray(contents[p]) && map[p].allowRepeat) {
-        result = contents[p].map((s: any) =>
-          xmlSingleItemProcessor(s, map[p], item),
-        );
-      } else {
-        result = xmlSingleItemProcessor(contents[p], map[p], item);
-      }
+  for (const [mapKey, mapValue] of Object.entries(map)) {
+    const content = contents[mapKey];
+    if (content !== undefined) {
+      const result =
+        Array.isArray(content) && mapValue.allowRepeat
+          ? content.map((s: any) => xmlSingleItemProcessor(s, mapValue, item))
+          : xmlSingleItemProcessor(content, mapValue, item);
 
-      if (map[p].xmlName && result !== undefined) {
-        item[map[p].xmlName] = result;
+      if (mapValue.xmlName && result !== undefined) {
+        item[mapValue.xmlName] = result;
       }
     }
-  });
+  }
 
   return item;
 }

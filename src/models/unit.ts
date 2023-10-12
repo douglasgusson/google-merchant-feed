@@ -23,7 +23,7 @@ export const UNIT = {
 } as const;
 
 export namespace Unit {
-  export type Model = (typeof UNIT)[keyof typeof UNIT];
+  export type Model = keyof typeof UNIT;
 
   export function formatter(value: Model): string {
     const isValidUnit = (value: string): value is Model => {
