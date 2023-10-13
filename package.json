@@ -1,6 +1,6 @@
 {
   "name": "google-merchant-feed",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A simple library to generate Google Merchant XML Feed",
   "author": "Douglas Gusson",
   "license": "MIT",
