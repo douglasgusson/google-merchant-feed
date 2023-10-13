@@ -4,6 +4,7 @@ A simple library to generate Google Merchant XML Feed
 
 [![npm version](https://badge.fury.io/js/google-merchant-feed.svg)](https://badge.fury.io/js/google-merchant-feed)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![NPM Downloads](https://badgen.net/npm/dm/google-merchant-feed)](https://www.npmjs.com/package/google-merchant-feed)
 
 ## Installation
 
