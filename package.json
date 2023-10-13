@@ -1,10 +1,11 @@
 {
   "name": "google-merchant-feed",
   "version": "0.0.1",
-  "description": "",
+  "description": "A simple library to generate Google Merchant XML Feed",
+  "author": "Douglas Gusson",
+  "license": "MIT",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "license": "MIT",
   "keywords": [
     "google",
     "merchant",
@@ -14,7 +15,14 @@
     "products",
     "shopping"
   ],
-  "author": "Douglas Gusson",
+  "homepage": "https://github.com/douglasgusson/google-merchant-feed/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/douglasgusson/google-merchant-feed/"
+  },
+  "bugs": {
+    "url": "https://github.com/douglasgusson/google-merchant-feed/issues"
+  },
   "files": [
     "src",
     "dist"
