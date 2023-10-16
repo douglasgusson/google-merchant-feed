@@ -28,9 +28,9 @@ export type XmlPropertiesMapNodeItems = XmlPropertiesMapNode["items"];
 
 export const xmlPropertiesMap: Record<keyof Product, XmlPropertiesMapNode> = {
   id: { xmlName: "g:id" },
-  title: { xmlName: "title" },
+  title: { xmlName: "g:title" },
   description: { xmlName: "g:description" },
-  link: { xmlName: "link" },
+  link: { xmlName: "g:link" },
   imageLink: { xmlName: "g:image_link" },
   mobileLink: { xmlName: "g:mobile_link" },
   additionalImageLinks: {

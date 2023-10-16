@@ -80,7 +80,7 @@ describe("FeedBuilder", () => {
       expect(xml).toContain("<link>https://example.com/feed</link>");
       expect(xml).toContain("<description>My Feed Description</description>");
       expect(xml).toContain("<g:id>123</g:id>");
-      expect(xml).toContain("<title>My Product</title>");
+      expect(xml).toContain("<g:title>My Product</g:title>");
     });
   });
 });
