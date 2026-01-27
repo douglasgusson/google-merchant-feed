@@ -24,7 +24,7 @@ describe("AgeGroup", () => {
 
     it("throws an error for an invalid age group", () => {
       // @ts-ignore - Testing invalid input at runtime (JS)
-      expect(() => AgeGroup.formatter("invalid")).toThrowError(
+      expect(() => AgeGroup.formatter("invalid")).toThrow(
         'Invalid age group: "invalid". Valid values are: newborn, infant, toddler, kids, adult',
       );
     });
