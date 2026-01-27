@@ -31,7 +31,7 @@
     "node": ">=18"
   },
   "scripts": {
-    "prepare": "husky install && npm run build",
+    "prepare": "npm run build",
     "build": "tsc",
     "watch": "tsc --watch",
     "prettier": "prettier --write .",
