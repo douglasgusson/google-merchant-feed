@@ -19,7 +19,7 @@ describe("Availability", () => {
 
     it("throws an error for invalid availability", () => {
       // @ts-ignore
-      expect(() => Availability.formatter("invalid")).toThrowError(
+      expect(() => Availability.formatter("invalid")).toThrow(
         'Invalid availability: "invalid". Valid values are: in_stock, out_of_stock, preorder',
       );
     });

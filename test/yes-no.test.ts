@@ -20,7 +20,7 @@ describe("YesNo", () => {
 
     it("should throw an error when given an invalid value", () => {
       // @ts-ignore
-      expect(() => YesNo.formatter("invalid")).toThrowError(
+      expect(() => YesNo.formatter("invalid")).toThrow(
         'Invalid yes/no value: "invalid". Valid values are: yes, no',
       );
     });

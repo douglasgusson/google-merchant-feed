@@ -1,6 +1,6 @@
 {
   "name": "google-merchant-feed",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A simple library to generate Google Merchant XML Feed",
   "author": "Douglas Gusson",
   "license": "MIT",
@@ -28,7 +28,7 @@
     "dist"
   ],
   "engines": {
-    "node": ">=16"
+    "node": ">=18"
   },
   "scripts": {
     "prepare": "husky install && npm run build",
@@ -43,15 +43,16 @@
     "clean": "rm -rf ./dist"
   },
   "dependencies": {
-    "xmlbuilder2": "^3.1.1"
+    "xmlbuilder2": "^4.0.3"
   },
   "devDependencies": {
-    "@types/jest": "^29.5.5",
-    "husky": "^8.0.3",
-    "jest": "^29.7.0",
-    "prettier": "^3.0.3",
-    "ts-jest": "^29.1.1",
-    "tslib": "^2.6.2",
-    "typescript": "^5.2.2"
+    "@types/jest": "^30.0.0",
+    "@types/node": "^18.19.130",
+    "husky": "^9.1.7",
+    "jest": "^30.2.0",
+    "prettier": "^3.8.1",
+    "ts-jest": "^29.4.6",
+    "tslib": "^2.8.1",
+    "typescript": "^5.9.3"
   }
 }
